@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'dart:convert' as convert;
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -16,14 +16,13 @@ class Services with ChangeNotifier {
   static List petsMap = [];
 
   increasePlantPage() => plantsPage++;
-
   getPlants() async {
     if (currentPlantsPage != plantsPage) {
       currentPlantsPage = plantsPage;
       var response =
           await http.get('${plantUrl}page=$plantsPage&client_id=$accessId');
       var body = response.body;
-      List json = jsonDecode(body);
+      List json = convert.jsonDecode(body);
       json.forEach((element) {
         plantMap.add(
             {'title': element['description'], 'url': element['urls']['small']});
@@ -41,7 +40,7 @@ class Services with ChangeNotifier {
       var response =
           await http.get('${petsUrl}page=$petsPage&client_id=$accessId');
       var body = response.body;
-      List json = jsonDecode(body);
+      List json = convert.jsonDecode(body);
       json.forEach((element) {
         petsMap.add(
             {'title': element['description'], 'url': element['urls']['small']});

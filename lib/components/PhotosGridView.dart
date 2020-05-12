@@ -40,27 +40,44 @@ class _PhotosGridViewState extends State<PhotosGridView> {
                       (MediaQuery.of(context).size.width / 2 - 24) /
                           (((MediaQuery.of(context).size.width / 2 - 24) * 1.5 +
                               20))),
-              itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
+              itemBuilder: (context, index) => Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.network(
-                              '${snapshot.data[index]['url']}',
-                              height:
-                                  (MediaQuery.of(context).size.width / 2 - 24) *
-                                      1.5,
-                              width: MediaQuery.of(context).size.width / 2 - 24,
-                              fit: BoxFit.fill,
-                            )),
                         Flexible(
-                            child: Text(
-                          '${snapshot.data[index]['title']}',
-                          style: TextStyle(color: Colors.black.withOpacity(.5)),
-                        ))
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      '${snapshot.data[index]['url']}',
+                                      height:
+                                          (MediaQuery.of(context).size.width /
+                                                      2 -
+                                                  24) *
+                                              1.5,
+                                      width: MediaQuery.of(context).size.width /
+                                              2 -
+                                          24,
+                                      fit: BoxFit.fill,
+                                    )),
+                                Flexible(
+                                    child: Text(
+                                  '${snapshot.data[index]['title']}',
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(.5)),
+                                ))
+                              ],
+                            ),
+                          ),
+                        ),
+                        if (index == snapshot.data.length - 1 &&
+                            snapshot.data.length % 10 == 0)
+                          Text('Loading...')
                       ],
                     ),
                   ));
