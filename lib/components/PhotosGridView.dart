@@ -39,7 +39,7 @@ class _PhotosGridViewState extends State<PhotosGridView> {
                   childAspectRatio:
                       (MediaQuery.of(context).size.width / 2 - 24) /
                           (((MediaQuery.of(context).size.width / 2 - 24) * 1.5 +
-                              20))),
+                              24))),
               itemBuilder: (context, index) => Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
